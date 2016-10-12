@@ -12,11 +12,5 @@
         "psr-4": { "Axelero\\AwsS3Bundle\\": "" 
             
         }
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:fcamp/AxeleroAwsS3Bundle.git"
-        }
-    ]
+    }
 }
