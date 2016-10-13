@@ -1,20 +1,26 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="axelero_aws_s3.example.class">Axelero\AwsS3Bundle\Example</parameter>
+        <parameter key="axelero_aws_s3.class">Axelero\AwsS3Bundle\Services\S3Depot</parameter>
     </parameters>
 
     <services>
-        <service id="axelero_aws_s3.example" class="%axelero_aws_s3.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="axelero_aws_s3.client" class="Aws\S3\S3Client">
+            <argument type="collection">
+                <argument key="key">%axelero_aws_s3.key%</argument>
+                <argument key="secret">%axelero_aws_s3.secret%</argument>
+            </argument>
+            <factory class="Aws\S3\S3Client" method="factory"/>
+        </service>
+
+        <service id="axelero_aws_s3.depot" class="%axelero_aws_s3.class%">
+            <argument>%axelero_aws_s3.folder%</argument>
+            <argument>%axelero_aws_s3.bucket%</argument>
+            <argument type="service" id="axelero_aws_s3.client"/>
         </service>
     </services>
-    -->
 </container>

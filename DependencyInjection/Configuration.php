@@ -20,6 +20,22 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('axelero_aws_s3');
 
+        $rootNode
+            ->children()
+                ->scalarNode('bucket')
+                    ->isRequired()
+            ->end()
+                ->scalarNode('key')
+                    ->isRequired()
+            ->end()
+                ->scalarNode('secret')
+                    ->isRequired()
+            ->end()
+                ->scalarNode('folder')
+                    ->isRequired()
+            ->end()
+        ;
+
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
