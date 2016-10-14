@@ -8,9 +8,12 @@
             "email": "francesco.campana.76@gmail.com"
         }
     ],
+    "require": {
+        "aws/aws-sdk-php": "2.7.12"
+    }
     "autoload": {
-        "psr-4": { "Axelero\\AwsS3Bundle\\": "" 
-            
+        "psr-4": { 
+            "Axelero\\AwsS3Bundle\\": ""
         }
     }
 }
