@@ -10,7 +10,7 @@
     ],
     "require": {
         "aws/aws-sdk-php": "2.7.12"
-    }
+    },
     "autoload": {
         "psr-4": { 
             "Axelero\\AwsS3Bundle\\": ""
