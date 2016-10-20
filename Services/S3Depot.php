@@ -31,19 +31,22 @@ class S3Depot
     /**
      * Uploads a file in the same relative hierarchy
      * @param string $path the path of the file relative to the kernel root dir
-     * @return \Guzzle\Service\Resource\Model
+     * @return \Guzzle\Service\Resource\Model|null
      */
     function put($path)
     {
-        $info = $this->getMime($path);
+        if ($absolutePath = $this->getAbsolutePath($path)) {
+            $info = $this->getMime($path);
 
-        return $this->client->putObject([
-            'Bucket' => $this->bucket,
-            'Key' => $path,
-            'SourceFile' => $this->getAbsolutePath($path),
-            'ContentType' => $info,
-            'StorageClass' => 'REDUCED_REDUNDANCY'
-        ]);
+            return $this->client->putObject([
+                'Bucket' => $this->bucket,
+                'Key' => $path,
+                'SourceFile' => $absolutePath,
+                'ContentType' => $info,
+                'StorageClass' => 'REDUCED_REDUNDANCY'
+            ]);
+        }
+        return null;
     }
 
     /**
@@ -63,7 +66,7 @@ class S3Depot
      */
     private function getAbsolutePath($path)
     {
-        return preg_replace('#\/{2,}#', '/', $this->baseFolder . '/' . $path);
+        return realpath($this->baseFolder . '/' . $path);
     }
 
 
